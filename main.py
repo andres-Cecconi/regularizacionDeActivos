@@ -1,3 +1,5 @@
+from funciones import *
+
 print("Aquí habrá un programa para regularizar activos")
 
 edades = []
