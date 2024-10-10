@@ -84,6 +84,9 @@ while estado == True:
             print("El monto mas pequeño registrado es:", monto_minimo)
             print("El monto mas grande registrado es:", monto_maximo)
             print("El promedio de los montos registrados es:", total_montos / contador, "%")
+            for i in range(contador):
+                print("La profesión del contribuyente", i+1, "es:", profesiones[i])
+                print("El origen de los fondos del contribuyente", i+1, "es:", origen_fondos[i])
             
     
     else:
