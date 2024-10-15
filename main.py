@@ -38,52 +38,13 @@ while estado == True:
         estado = False
         
         if contador > 0:
-            fecha_lejana = fechas_declaraciones[0]
-            fecha_cercana = fechas_declaraciones[0]
-            
-            for i in fechas_declaraciones:
-                if i < fecha_lejana:
-                    fecha_lejana = i
-                if i > fecha_cercana:
-                    fecha_cercana = i
-                    
-            edad_minima = edades[0]
-            edad_maxima = edades[0]
-
-            for i in edades:
-                if i < edad_minima:
-                    edad_minima = i
-                if i > edad_maxima:
-                    edad_maxima = i
-                    
-            total_edades = 0
-            
-            for i in edades:
-                total_edades += i
-                
-            monto_minimo = monto_declaraciones[0]
-            monto_maximo = monto_declaraciones[0]
-
-            for i in monto_declaraciones:
-                if i < monto_minimo:
-                    monto_minimo = i
-                if i > monto_maximo:
-                    monto_maximo = i
-                    
-            total_montos = 0
-            
-            for i in monto_declaraciones:
-                total_montos += i
             
             print("La cantidad de contribuyentes registrados es:", contador)
-            print("La edad más pequeña registrada es:", edad_minima)
-            print("La edad más grande registrada es:", edad_maxima)
-            print("El promedio de las edades registradas es:", total_edades / contador, "%")
-            print("La fecha de declaracion mas cercana es:", fecha_cercana)
-            print("La fecha de declaracion mas lejana es:", fecha_lejana)
-            print("El monto mas pequeño registrado es:", monto_minimo)
-            print("El monto mas grande registrado es:", monto_maximo)
-            print("El promedio de los montos registrados es:", total_montos / contador, "%")
+            print("La edad más pequeña y la más grande registrada es:", calcular_edad_minima_maxima(edades))
+            print("El promedio de las edades registradas es:", calcular_promedio_edades(edades), "%")
+            print("La fecha de declaracion mas cercana y la más lejana registrada es:", calcular_fecha_declaraciones_cercana_lejana(fechas_declaraciones))
+            print("El monto mas pequeño y el más grande registrado es:", calcular_monto_minimo_maximo(monto_declaraciones))
+            print("El promedio de los montos registrados es:", calcular_promedio_montos(monto_declaraciones), "%")
             for i in range(contador):
                 print("La profesión del contribuyente", i+1, "es:", profesiones[i])
                 print("El origen de los fondos del contribuyente", i+1, "es:", origen_fondos[i])
