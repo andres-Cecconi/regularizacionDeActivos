@@ -30,6 +30,9 @@ while estado == True:
         fecha_declaracion = input("Por favor ingrese la fecha de la declaración (DD/MM/AAAA): ")
         #Ingresar obligatoriamente numeros ya que no es posible validar que no se ingresen letras
         monto_declarar = int(input("Por favor ingrese el monto a declarar (ingresar obligatoriamente numeros): "))
+        while monto_declarar <= 0:
+            print("No se permite ese monto")
+            monto_declarar = int(input("Por favor ingrese el monto a declarar (ingresar obligatoriamente numeros): "))
         origen_fondo = input("Por favor ingrese el origen de los fondos (no se permiten fondos de origen ilícito): ")
 
         edades.append(edad)
