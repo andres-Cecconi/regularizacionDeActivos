@@ -21,13 +21,16 @@ while estado == True:
         apellido = input("Por favor ingrese su apellido: ")
         nombre = input("Por favor ingrese su nombre: ")
         #Ingresar obligatoriamente en formato entero ya que no es posible validar que no se ingresen letras
-        edad = int(input("Por favor ingrese su edad (ingresar obligatoriamente en formato entero): "))
+        edad = int(input("Por favor ingrese su edad (ingresar obligatoriamente enteros): "))
+        while edad < 18:
+            print("No se permiten menores de edad")
+            edad = int(input("Por favor ingrese su edad (ingresar obligatoriamente enteros): "))
         fecha_nacimiento = input("Por favor ingrese su fecha de nacimiento (DD/MM/AAAA): ")
         profesion = input("Por favor ingrese su profesión: ")
         fecha_declaracion = input("Por favor ingrese la fecha de la declaración (DD/MM/AAAA): ")
         #Ingresar obligatoriamente numeros ya que no es posible validar que no se ingresen letras
         monto_declarar = int(input("Por favor ingrese el monto a declarar (ingresar obligatoriamente numeros): "))
-        origen_fondo = input("Por favor ingrese el origen de los fondos: ")
+        origen_fondo = input("Por favor ingrese el origen de los fondos (no se permiten fondos de origen ilícito): ")
 
         edades.append(edad)
         profesiones.append(profesion)
