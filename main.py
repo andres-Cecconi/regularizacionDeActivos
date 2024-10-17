@@ -17,7 +17,10 @@ while estado == True:
         
         contador += 1
         
-        dni = input("Por favor ingrese su DNI: ")
+        dni = input("Por favor ingrese su DNI (sin caracteres especiales y maximo 8 digitos): ")
+        while len(dni) > 8 or len(dni) < 7:
+            print("El DNI debe tener un maximo de 8 digitos y un minimo de 6 digitos")
+            dni = input("Por favor ingrese su DNI (sin caracteres especiales y maximo 8 digitos): ")
         apellido = input("Por favor ingrese su apellido: ")
         nombre = input("Por favor ingrese su nombre: ")
         #Ingresar obligatoriamente en formato entero ya que no es posible validar que no se ingresen letras
@@ -26,8 +29,14 @@ while estado == True:
             print("No se permiten menores de edad")
             edad = int(input("Por favor ingrese su edad (ingresar obligatoriamente enteros): "))
         fecha_nacimiento = input("Por favor ingrese su fecha de nacimiento (DD/MM/AAAA): ")
+        while len(fecha_nacimiento) < 10 or len(fecha_nacimiento) > 10:
+            print("La fecha de nacimiento no es valida (respetar formato para ingresar la fecha)")
+            fecha_nacimiento = input("Por favor ingrese su fecha de nacimiento (DD/MM/AAAA): ")
         profesion = input("Por favor ingrese su profesión: ")
         fecha_declaracion = input("Por favor ingrese la fecha de la declaración (DD/MM/AAAA): ")
+        while len(fecha_declaracion) < 10 or len(fecha_declaracion) > 10:
+            print("La fecha de la declaración no es valida (respetar formato para ingresar la fecha)")
+            fecha_declaracion = input("Por favor ingrese la fecha de la declaración (DD/MM/AAAA): ")
         #Ingresar obligatoriamente numeros ya que no es posible validar que no se ingresen letras
         monto_declarar = int(input("Por favor ingrese el monto a declarar (ingresar obligatoriamente numeros): "))
         while monto_declarar <= 0:
