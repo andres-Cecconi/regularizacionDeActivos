@@ -28,7 +28,7 @@ def calcular_promedio_edades (edades):
     for i in edades:
         total_edades += i
         
-    return total_edades / len(edades)
+    return total_edades / len(edades) # contemplar caso de division por cero
 
 
 
@@ -69,7 +69,7 @@ def calcular_monto_minimo (monto_declaraciones):
 def calcular_monto_maximo(monto_declaraciones):
     monto_maximo = monto_declaraciones[0]
 
-    for i in monto_declaraciones:
+    for i in monto_declaraciones: # cambiar el nombre de la variable i por monto
         if i > monto_maximo:
             monto_maximo = i
             
