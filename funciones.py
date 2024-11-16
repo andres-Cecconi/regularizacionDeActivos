@@ -84,6 +84,3 @@ def calcular_promedio_montos (monto_declaraciones):
         total_montos += i
         
     return total_montos / len(monto_declaraciones)
-
-
-
