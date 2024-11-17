@@ -1,219 +1,188 @@
 from funciones import *
 
-print("Bienvenido al Sistema de Regularización de Activos")
-
-def validar_edad(edad):
-    while edad < 18:
-        print("No se permiten menores de edad")
-        edad = int(input("Por favor ingrese su edad (ingresar obligatoriamente enteros): "))
-    return edad
-
-
-def obtener_profesion():
-    print(profesiones_listadas)
-    respuesta = input("Ingrese el número de la profesión o escriba su profesión si no está en la lista: ")
-    
-    es_numero = True
-    for caracter in respuesta:
-        if caracter < '0' or caracter > '9':
-            es_numero = False
-            break
-    
-    if es_numero:
-        numero_ingresado = int(respuesta)
-        if 1 <= numero_ingresado <= len(profesiones):
-            profesion_seleccionada = profesiones[numero_ingresado - 1]
-            return profesion_seleccionada
-        else:
-            print("La profesión no está en la lista.")
-    else:
-        profesion_manual = respuesta
-        return profesion_manual
-    
-
-def obtener_origen_fondo():
-    print(origenes_fondos_listados)
-    respuesta = input("Ingrese el número del origen de fondo o escriba su origen de fondo si no está en la lista: ")
-    
-    es_numero = True
-    for caracter in respuesta:
-        if caracter < '0' or caracter > '9':
-            es_numero = False
-            break
-    
-    if es_numero:
-        numero_ingresado = int(respuesta)
-        if 1 <= numero_ingresado <= len(origenes_fondos):
-            origen_fondo_seleccionado = origenes_fondos[numero_ingresado - 1]
-            return origen_fondo_seleccionado
-        else:
-            print("El origen de fondo no está en la lista.")
-    else:
-        origen_fondo_manual = respuesta
-        return origen_fondo_manual
-    
-
-
-edades = []
-profesiones = []
-fechas_declaraciones = []
-monto_declaraciones = []
-origen_fondos = []
-profesiones = [
-    "Abogado/a", "Contador/a Público", "Médico/a", "Ingeniero/a", "Arquitecto/a",
-    "Docente/Profesor/a", "Psicólogo/a", "Diseñador/a Gráfico/a", "Farmacéutico/a",
-    "Veterinario/a", "Enfermero/a", "Kinesiólogo/a", "Odontólogo/a", "Economista",
-    "Periodista/Comunicador/a Social", "Técnico/a en Informática/Programador/a", 
-    "Electricista", "Carpintero/a", "Plomero/a", "Chef/Gastrónomo/a",
-    "Piloto/a de Aviación", "Actor/Actriz", "Artista Plástico/a", "Fotógrafo/a", 
-    "Músico/a", "Empleado/a Administrativo/a", "Comerciante", "Ingeniero/a Agrónomo/a", 
-    "Traductor/a", "Técnico/a en Construcción", "Operario/a de Fábrica", 
-    "Analista de Sistemas", "Científico/a/Investigador/a", "Marketing/Publicidad", 
-    "Deportista Profesional", "Agente Inmobiliario", "Soldador/a", 
-    "Operador/a de Maquinaria Pesada", "Mecánico/a Automotor", "Peluquero/a/Estilista"
+# Variables
+usuarios = []  # Lista de usuarios, cada usuario es una lista con los datos de cada usuario (nombre [0], apellido [1], dni [2], edad [3], fecha de nacimiento [4], profesion [5], fecha de declaración [6], radicación de bienes [7], bienes [8], monto [9], origen de fondos [10])
+profesiones_listadas = [
+    "Abogado/a",
+    "Agente Inmobiliario/a",
+    "Arquitecto/a",
+    "Auditor/a",
+    "Consultor/a",
+    "Contador/a",
+    "Corredor/a de Comercio",
+    "Diseñador/a Gráfico/a",
+    "Economista",
+    "Empresario/a"
+    "Escribano/a",
+    "Especialista en Tributación",
+    "Gestor/a de Proyectos",
+    "Ingeniero/a",
+    "Médico/a",
+    "Odontólogo/a",
+    "Programador/a",
+    "Psicólogo/a",
+    "Veterinario/a",
 ]
 
-profesiones_listadas = """
-    1. Abogado/a
-    2. Contador/a Público
-    3. Médico/a
-    4. Ingeniero/a 
-    5. Arquitecto/a 
-    6. Docente/Profesor/a 
-    7. Psicólogo/a
-    8. Diseñador/a Gráfico/a
-    9. Farmacéutico/a 
-    10. Veterinario/a 
-    11. Enfermero/a
-    12. Kinesiólogo/a 
-    13. Odontólogo/a
-    14. Economista
-    15. Periodista/Comunicador/a Social 
-    16. Técnico/a en Informática/Programador/a
-    17. Electricista
-    18. Carpintero/a
-    19. Plomero/a
-    20. Chef/Gastrónomo/a 
-    21. Piloto/a de Aviación
-    22. Actor/Actriz
-    23. Artista Plástico/a 
-    24. Fotógrafo/a
-    25. Músico/a
-    26. Empleado/a Administrativo/a
-    27. Comerciante
-    28. Ingeniero/a Agrónomo/a
-    29. Traductor/a
-    30. Técnico/a en Construcción
-    31. Operario/a de Fábrica
-    32. Analista de Sistemas
-    33. Científico/a/Investigador/a
-    34. Marketing/Publicidad
-    35. Deportista Profesional
-    36. Agente Inmobiliario
-    37. Soldador/a
-    38. Operador/a de Maquinaria Pesada 
-    39. Mecánico/a Automotor 
-    40. Peluquero/a/Estilista
 
-"""
-frecuencias = [0] * len(profesiones)                    
-
-origenes_fondos = [
-    "Ingresos laborales",
-    "Inversiones financieras",
-    "Herencia",
-    "Donación"
+origenes_fondos_listados = origenes_fondos = [
+    "Ingresos no declarados previamente",
+    "Ingresos derivados de actividades informales o no registradas",
+    "Rendimientos de bienes no declarados",
+    "Fondos provenientes de la venta de bienes no declarados",
+    "Fondos obtenidos en el exterior",
+    "Donaciones no informadas",
+    "Incorporación de bienes de origen lícito",
+    "Préstamos informales o no documentados",
+    "Herencias y sucesiones"
 ]
-origenes_fondos_listados = """
-    1 - Ingresos laborales
-    2 - Inversiones financieras
-    3 - Herencia
-    4 - Donación
-    5 - Ninguno de los anteriores (salir)
-"""
 
-contador = 0
+radicacion_bienes_listados = [
+    "Argentina", 
+    "Exterior"
+]
+
+bienes_listados = [
+    "Moneda extranjera", 
+    "Inmuebles", 
+    "Participacion en sociedades o cuotapartes de FCI", 
+    "Titulos valores", 
+    "Criptomonedas"
+]
+
 estado = True
+contador_usuarios = 0
 
-while estado == True: 
-    contribuyente = input("Por favor ingrese N para ingresar un nuevo contribuyente (o S para salir): ")
-    if contribuyente == "N" or contribuyente == "n":
-        contador += 1
+while estado == True:
+    nuevo_usuario = input("Desea ingresar un nuevo usuario? (si/no): ")
+    if nuevo_usuario == "no":
+        estado = False  
+
+        if contador_usuarios > 0:
+            print ("Cantidad de usuarios ingresados: ", contador_usuarios)
+            print("Estadísticas de los usuarios:")
+            edad_min = edad_minima(usuarios)
+            print(f"La menor edad registrada es de {edad_min} años")
+            edad_max = edad_maxima(usuarios)
+            print(f"La mayor edad registrada es de {edad_max} años")
+            edad_prom = promedio_edad(usuarios)
+            print(f"El promedio de edad de los usuarios registrados es de  {edad_prom} años")
+            fecha_mas_antigua = fecha_declaracion_mas_antigua(usuarios)
+            print(f"La fecha de declaración más antigua es {fecha_mas_antigua}")
+            fecha_mas_reciente = fecha_declaracion_mas_reciente(usuarios)
+            print(f"La fecha de declaración más reciente es {fecha_mas_reciente}")
+            monto_min = menor_monto(usuarios)
+            print(f"El monto más bajo declarado es de {monto_min} dólares")
+            monto_max = mayor_monto(usuarios)
+            print(f"El monto más alto declarado es de {monto_max} dólares")
+            monto_prom = monto_promedio(usuarios)
+            print(f"El monto promedio declarado es de {monto_prom} dólares")
+            bien_mas_repetido, cantidad = activo_mas_repetido(usuarios)
+            print(f"El bien más repetido es '{bien_mas_repetido}' y aparece {cantidad} veces.")
+            bien_menos_repetido, cantidad_menos_repetido = activo_menos_repetido(usuarios)
+            print(f"El bien menos repetido es '{bien_menos_repetido}' y aparece {cantidad_menos_repetido} veces.")
+            profesion_top, cantidad = profesion_mas_elegida(usuarios)
+            print(f"La profesion mas elegida es '{profesion_top}' y aparece {cantidad} veces.")
+            origen_fondos_top, cantidad = origen_fondos_mas_elegido(usuarios)
+            print(f"El origen de fondos mas elegido es '{origen_fondos_top}' y aparece {cantidad} veces.")
+            print("------------------------------")
+
+        buscar_usuario = "si"
+        while buscar_usuario == "si":
+            buscar_usuario = input("Desea buscar los datos de algún contribuyente en particular? (si/no): ")
+            if buscar_usuario == "no":
+                break
+            elif buscar_usuario == "si":
+                dni_buscar = input("Ingrese el dni del usuario que desea buscar: ")
+                encontrado = False
+                for usuario in usuarios:
+                    if usuario[2] == int(dni_buscar):
+                        print(f"Nombre: {usuario[0]}")
+                        print(f"Apellido: {usuario[1]}")
+                        print(f"DNI: {usuario[2]}")
+                        print(f"Edad: {usuario[3]}")
+                        print(f"Fecha de nacimiento: {usuario[4]}")
+                        print(f"Fecha de declaración: {usuario[5]}")
+                        print(f"Profesión: {usuario[6]}")
+                        print(f"Radicación de bienes: {usuario[7]}")
+                        print(f"Bienes: {usuario[8]}")
+                        print(f"Monto: {usuario[9]}")
+                        print(f"Origen de los fondos: {usuario[10]}")
+                        print("------------------------------")
+                        encontrado = True
+                        break
+                if not encontrado:
+                    print("No se encontraron datos del contribuyente con ese DNI, por favor, verifique el DNI ingresado.")
+
+            print("------------------------------")
+            print("Gracias por utilizar nuestros servicios!")
+        else:
+            print("No se ingresaron usuarios")
+            print ("Gracias por utilizar nuestros servicios!")
+
+    elif nuevo_usuario == "si":
+        contador_usuarios +=1
+
+        nombre_usuario = input("Ingrese el nombre del usuario: ")
+        while not nombre_usuario:
+            print("Por favor, ingrese un nombre válido.")
+            nombre_usuario = input("Ingrese el nombre del usuario: ")
+
+        apellido_usuario = input("Ingrese el apellido del usuario: ")
+        while not apellido_usuario:
+            print("Por favor, ingrese un apellido válido.")
+            apellido_usuario = input("Ingrese el apellido del usuario: ")
+
+        dni_usuario = int(input("Ingrese el DNI del usuario: "))
+        while (dni_usuario < 1000000 or dni_usuario > 99999999):
+            print("Por favor, ingrese un DNI válido.")
+            dni_usuario = int(input("Ingrese el DNI del usuario: "))
         
-        dni = input("Por favor ingrese su DNI (sin caracteres especiales y maximo 8 digitos): ")
-        while len(dni) > 8 or len(dni) < 7:
-            print("El DNI debe tener un maximo de 8 digitos y un minimo de 6 digitos")
-            dni = input("Por favor ingrese su DNI (sin caracteres especiales y maximo 8 digitos): ")
-
-        apellido = input("Por favor ingrese su apellido: ")
-
-        nombre = input("Por favor ingrese su nombre: ")
-
-        #Ingresar obligatoriamente en formato entero ya que no es posible validar que no se ingresen letras
-        edad = validar_edad(int(input("Por favor ingrese su edad (ingresar obligatoriamente enteros): ")))
-
-        fecha_nacimiento = input("Por favor ingrese su fecha de nacimiento (DD/MM/AAAA): ")
-        while len(fecha_nacimiento) != 10:
-            print("La fecha de nacimiento no es valida (respetar formato para ingresar la fecha)")
-            fecha_nacimiento = input("Por favor ingrese su fecha de nacimiento (DD/MM/AAAA): ")
-
-        profesion_seleccionada = obtener_profesion()
-        print("La profesión seleccionada es:", profesion_seleccionada)
-
-        for i in range(len(profesiones)):
-            for j in range (i + 1, len(profesiones)):
-                if frecuencias[i] == frecuencias[j]:
-                    #intermcio de profesiones y frecuencias
-                    profesion_temporal = profesiones[i]
-                    profesiones[i] = profesiones[j]
-                    profesiones[j] = profesion_temporal
-                    frecuencia_temporal = frecuencias[i]
-                    frecuencias[i] = frecuencias[j]
-                    frecuencias[j] = frecuencia_temporal
-
-        fecha_declaracion = input("Por favor ingrese la fecha de la declaración (DD/MM/AAAA): ")
-        while len(fecha_declaracion) != 10:
-            print("La fecha de la declaración no es valida (respetar formato para ingresar la fecha)")
-            fecha_declaracion = input("Por favor ingrese la fecha de la declaración (DD/MM/AAAA): ")
+        edad_usuario = int(input("Ingrese la edad del usuario: "))
+        while (edad_usuario < 18):
+            print("No se permite el registro de menores de edad. Por favor, ingrese una edad válida.")
+            edad_usuario = int(input("Ingrese la edad del usuario: "))
         
-        #Ingresar obligatoriamente numeros ya que no es posible validar que no se ingresen letras
-        monto_declarar = float(input("Por favor ingrese el monto a declarar (ingresar obligatoriamente numeros): "))
-        while monto_declarar <= 0:
-            print("Monto invalido, por favor ingrese un monto mayor a 0")
-            monto_declarar = float(input("Por favor ingrese el monto a declarar (ingresar obligatoriamente numeros): "))
+        fecha_nacimiento = input("Ingrese la fecha de nacimiento del usuario (dd/mm/aaaa): ")
+        while not fecha_nacimiento or len(fecha_nacimiento) != 10:
+            print("Por favor, ingrese una fecha válida.")
+            fecha_nacimiento = input("Ingrese la fecha de nacimiento del usuario (dd/mm/aaaa): ")
 
-        # origen_fondo = input("Por favor ingrese el origen de los fondos (no se permiten fondos de origen ilícito): ")
-        origen_fondo = obtener_origen_fondo()
-        print("El origen de los fondos es:", origen_fondo)
-
-        edades.append(edad)
-        profesiones.append(profesion_seleccionada)
-        fechas_declaraciones.append(fecha_declaracion)
-        monto_declaraciones.append(monto_declarar)
-        origen_fondos.append(origen_fondo)
-
-    elif contribuyente == "S" or contribuyente == "s":
-        print("Hasta la próxima")
-        estado = False
+        print(profesiones_listadas)
+        profesion_usuario = input("Ingrese su profesion de acuerdo a la lista: ")
+        while profesion_usuario not in profesiones_listadas:
+            print("Por favor, ingrese una profesión válida.")
+            profesion_usuario = input("Ingrese su profesion de acuerdo a la lista: ")
         
-        if contador > 0:
-            
-            print("La cantidad de contribuyentes registrados es:", contador)
-            print("La menor edad registrada es:", calcular_edad_minima(edades))
-            print("La mayor edad registrada es:", calcular_edad_maxima(edades))
-            print("El promedio de las edades registradas es:", calcular_promedio_edades(edades))
-            print("La fecha de declaración más cercana registrada es:", calcular_fecha_declaraciones_cercana(fechas_declaraciones))
-            print("La fecha de declaración más lejana registrada es:", calcular_fecha_declaraciones_lejana(fechas_declaraciones))
-            print("El menor monto registrado es:", calcular_monto_minimo(monto_declaraciones))
-            print("El mayor monto registrado es:", calcular_monto_maximo(monto_declaraciones))
-            print("El promedio de los montos registrados es:", calcular_promedio_montos(monto_declaraciones))
-            print("Ranking de las profesiones más seleccionadas:")
-            for i in range(len(profesiones)):   
-                print(f"{profesiones[i]}: {frecuencias[i]} veces")
-            for i in range(contador):
-                    print("El origen de los fondos del contribuyente", i+1, "es:", origen_fondos[i])
-            
-            print("Gracias por utilizar el sistema")
-    else:
-        print("Por favor ingrese un valor válido")
+        fecha_declaracion = input("Ingrese la fecha de declaración de usuario (dd/mm/aaaa): ")
+        while not fecha_declaracion or len(fecha_declaracion) !=10:
+            print("Por favor, ingrese una fecha válida.")
+            fecha_declaracion = input("Ingrese la fecha de declaración de usuario (dd/mm/aaaa): ")
+
+        print(radicacion_bienes_listados)
+        radicacion_bienes = input("Ingrese la radicación de los bienes: ")
+        while radicacion_bienes not in radicacion_bienes_listados:
+            print("Por favor, ingrese una radicación de bienes válida.")
+            radicacion_bienes = input("Ingrese la radicación de los bienes: ")
+
+        print(bienes_listados)
+        bienes = input("Ingrese los bienes que posee: ")
+        while bienes not in bienes_listados:
+            print("Por favor, ingrese un bien válido.")
+            bienes = input("Ingrese los bienes que posee: ")
+        
+        monto = float(input("Ingrese el monto en dólares de los bienes a regularizar: "))
+        while not monto or (monto < 0):
+            print("Por favor, ingrese un monto válido.")
+            monto = float(input("Ingrese el monto en dólares que quiere regularizar: "))
+        
+        print(origenes_fondos_listados)
+        origen_fondos = input("Ingrese el origen de los fondos de acuerdo a la lista: ")
+        while origen_fondos not in origenes_fondos_listados:
+            print("Por favor, ingrese un origen de fondos válido.")
+            origen_fondos = input("Ingrese el origen de los fondos de acuerdo a la lista: ")
+
+        usuario = [nombre_usuario, apellido_usuario, dni_usuario, edad_usuario, fecha_nacimiento, profesion_usuario, fecha_declaracion, radicacion_bienes, bienes, monto, origen_fondos]
+        usuarios.append(usuario)
+
 
