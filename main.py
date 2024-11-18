@@ -1,6 +1,6 @@
 from funciones import *
 
-print("Aquí habrá un programa para regularizar activos")
+print("¡Hola! Estás a punto de comenzar el proceso para regularizar tus activos en Argentina de manera sencilla y transparente. Este programa te ofrece la oportunidad de poner al día tus bienes y cumplir con tus obligaciones fiscales, todo con el respaldo de un sistema claro y accesible.")
 
 edades = []
 profesiones = []
@@ -34,66 +34,67 @@ while estado == True:
             fecha_nacimiento = input("Por favor ingrese su fecha de nacimiento (DD/MM/AAAA): ")
         
         profesiones_listadas = """
-        1 - Abogado/a
-        2 - Médico/a
-        3 - Contador/a
-        4 - Ingeniero/a (en diversas ramas: civil, industrial, sistemas, etc.)
-        5 - Arquitecto/a
-        6 - Psicólogo/a
-        7 - Enfermero/a
-        8 - Licenciado/a en Administración
-        9 - Profesor/a
-        10 - Diseñador/a Gráfico/a
-        11 - Periodista
-        12 - Farmacéutico/a
-        13 - Veterinario/a
-        14 - Técnico/a en Informática
-        15 - Trabajador/a Social
-        16 - Electricista
-        17 - Chef
-        18 - Diseñador/a Industrial
-        19 - Técnico/a en Construcción
-        20 - Sastre/a
-        21 - Estilista/Peluquero/a
-        22 - Traductor/a
-        23 - Técnico/a en Higiene y Seguridad en el Trabajo
-        24 - Guía de Turismo
-        25 - Músico/a
-        26 - Actor/Actriz
-        27 - Productor/a de Eventos
-        28 - Cocinero/a
-        29 - Carpintero/a
-        30 - Albañil
-        31 - Ingeniero/a en Sistemas
-        32 - Fisioterapeuta
-        33 - Nutricionista
-        34 - Fonoaudiólogo/a
-        35 - Oftalmólogo/a
-        36 - Odontólogo/a
-        37 - Líder de Ventas/Vendedor/a
-        38 - Perito/a
-        39 - Notario/a
-        40 - Coach Personal o Empresarial
-        41 - Consultor/a
-        42 - Científico/a
-        43 - Matemático/a
-        44 - Analista de Datos
-        45 - Bioquímico/a
-        46 - Antropólogo/a
-        47 - Técnico/a en Energías Renovables
-        48 - Decorador/a de Interiores
-        49 - Asesor/a Financiero/a
-        50 - Investigador/a
-        51 - Programador/a
-        52 - Técnico/a en Logística
-        53 - Artista Plástico/a
-        54 - Cineasta
-        55 - Licenciado/a en Relaciones Públicas
-        56 - Operador/a de Radio
-        57 - Estilista de Moda
-        58 - Diseñador/a de Moda
-        59 - Maestro/a de Obras
-        60 - Técnico/a en Redes y Telecomunicaciones
+        Abogado/a
+        Médico/a
+        Contador/a
+        Ingeniero/a (en diversas ramas: civil, industrial, sistemas, etc.)
+        Arquitecto/a
+        Psicólogo/a
+        Enfermero/a
+        Licenciado/a en Administración
+        Profesor/a
+        Diseñador/a Gráfico/a
+        Periodista
+        Farmacéutico/a
+        Veterinario/a
+        Técnico/a en Informática
+        Trabajador/a Social
+        Electricista
+        Chef
+        Diseñador/a Industrial
+        Técnico/a en Construcción
+        Sastre/a
+        Estilista/Peluquero/a
+        Traductor/a
+        Técnico/a en Higiene y Seguridad en el Trabajo
+        Guía de Turismo
+        Músico/a
+        Actor/Actriz
+        Productor/a de Eventos
+        Cocinero/a
+        Carpintero/a
+        Albañil
+        Ingeniero/a en Sistemas
+        Fisioterapeuta
+        Nutricionista
+        Fonoaudiólogo/a
+        Oftalmólogo/a
+        Odontólogo/a
+        Líder de Ventas/Vendedor/a
+        Perito/a
+        Notario/a
+        Coach Personal o Empresarial
+        Consultor/a
+        Científico/a
+        Matemático/a
+        Analista de Datos
+        Bioquímico/a
+        Antropólogo/a
+        Técnico/a en Energías Renovables
+        Decorador/a de Interiores
+        Asesor/a Financiero/a
+        Investigador/a
+        Programador/a
+        Técnico/a en Logística
+        Artista Plástico/a
+        Cineasta
+        Licenciado/a en Relaciones Públicas
+        Operador/a de Radio
+        Estilista de Moda
+        Diseñador/a de Moda
+        Maestro/a de Obras
+        Técnico/a en Redes y Telecomunicaciones
+        Otro
         """
         print(profesiones_listadas)
         profesion = input("Por favor ingrese el número correspondiente a su profesión: ")
@@ -106,6 +107,20 @@ while estado == True:
         while monto_declarar <= 0:
             print("No se permite ese monto")
             monto_declarar = float(input("Por favor ingrese el monto a declarar (ingresar obligatoriamente numeros): "))
+        origenes_fondos = """
+        Rendimientos de Actividades Comerciales o Profesionales"
+        Rendimientos de Inversiones Financieras"
+        Ingresos por Actividades en el Exterior"
+        Venta de Bienes Inmuebles
+        Herencias o Donaciones
+        Ahorros o Dinero en Efectivo No Declarado
+        Rendimientos de Actividades No Registradas (Trabajo Informal)
+        Préstamos o Créditos
+        Fondos Derivados de Criptomonedas
+        Fondos de Origen Empresarial o Comercial (Sociedades)
+        Fondos de Actividades Agrícolas
+        """
+        print(origenes_fondos)
         origen_fondo = input("Por favor ingrese el origen de los fondos (no se permiten fondos de origen ilícito): ")
 
         edades.append(edad)
@@ -115,7 +130,7 @@ while estado == True:
         origen_fondos.append(origen_fondo)
 
     elif contribuyente == "S" or contribuyente == "s":
-        print("Hasta la próxima")
+        print("Has finalizado exitosamente tu trámite de regularización de activos. Gracias por utilizar nuestra plataforma y por cumplir con tus obligaciones fiscales de manera responsable.")
         estado = False
         
         if contador > 0:
@@ -132,6 +147,16 @@ while estado == True:
             for i in range(contador):
                 print("La profesión del contribuyente", i+1, "es:", profesiones[i])
                 print("El origen de los fondos del contribuyente", i+1, "es:", origen_fondos[i])
+                
+            # Mostrar el ranking de profesiones (sin ordenar)
+            print("\nRanking de Profesiones (Sin ordenar):")
+            for profesion, cantidad in profesiones.items():
+                print(f"Profesión {profesion}: {cantidad} contribuyentes")
+            
+            # Mostrar el ranking de orígenes de fondos (sin ordenar)
+            print("\nRanking de Orígenes de Fondos (Sin ordenar):")
+            for origen, cantidad in profesiones.items():
+                print(f"Origen {origen}: {cantidad} contribuyentes")
             
     
     else:
