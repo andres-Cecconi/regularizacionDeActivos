@@ -85,5 +85,18 @@ def calcular_promedio_montos (monto_declaraciones):
         
     return total_montos / len(monto_declaraciones)
 
+def calcular_ranking(lista):
+    ranking = []
+    for item in lista:
+        encontrado = False
+        for registro in ranking:
+            if registro[0] == item:
+                registro[1] += 1
+                encontrado = True
+        if not encontrado:
+            ranking.append([item, 1])
+    return ranking
+
+
 
 

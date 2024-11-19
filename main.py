@@ -11,7 +11,7 @@ contador = 0
 
 estado = True
 
-while estado == True:
+while estado:
     contribuyente = input("Por favor ingrese N para nuevo contribuyente (o S para salir): ")
     if contribuyente == "N" or contribuyente == "n":
         
@@ -108,9 +108,9 @@ while estado == True:
             print("No se permite ese monto")
             monto_declarar = float(input("Por favor ingrese el monto a declarar (ingresar obligatoriamente numeros): "))
         origenes_fondos = """
-        Rendimientos de Actividades Comerciales o Profesionales"
-        Rendimientos de Inversiones Financieras"
-        Ingresos por Actividades en el Exterior"
+        Rendimientos de Actividades Comerciales o Profesionales
+        Rendimientos de Inversiones Financieras
+        Ingresos por Actividades en el Exterior
         Venta de Bienes Inmuebles
         Herencias o Donaciones
         Ahorros o Dinero en Efectivo No Declarado
@@ -134,7 +134,6 @@ while estado == True:
         estado = False
         
         if contador > 0:
-            
             print("La cantidad de contribuyentes registrados es:", contador)
             print("La menor edad registrada es:", calcular_edad_minima(edades))
             print("La mayor edad registrada es:", calcular_edad_maxima(edades))
@@ -144,21 +143,19 @@ while estado == True:
             print("El menor monto registrado es:", calcular_monto_minimo(monto_declaraciones))
             print("El mayor monto registrado es:", calcular_monto_maximo(monto_declaraciones))
             print("El promedio de los montos registrados es:", calcular_promedio_montos(monto_declaraciones))
-            for i in range(contador):
-                print("La profesión del contribuyente", i+1, "es:", profesiones[i])
-                print("El origen de los fondos del contribuyente", i+1, "es:", origen_fondos[i])
-                
-            # Mostrar el ranking de profesiones (sin ordenar)
-            print("\nRanking de Profesiones (Sin ordenar):")
-            for profesion, cantidad in profesiones.items():
+            
+            # Calcular ranking de profesiones
+            ranking_profesiones = calcular_ranking(profesiones)
+            print("\nRanking de Profesiones:")
+            for profesion, cantidad in ranking_profesiones:
                 print(f"Profesión {profesion}: {cantidad} contribuyentes")
             
-            # Mostrar el ranking de orígenes de fondos (sin ordenar)
-            print("\nRanking de Orígenes de Fondos (Sin ordenar):")
-            for origen, cantidad in profesiones.items():
+            # Calcular ranking de orígenes de fondos
+            ranking_origenes = calcular_ranking(origen_fondos)
+            print("\nRanking de Orígenes de Fondos:")
+            for origen, cantidad in ranking_origenes:
                 print(f"Origen {origen}: {cantidad} contribuyentes")
-            
-    
     else:
         print("Por favor ingrese un valor válido")
+
 
